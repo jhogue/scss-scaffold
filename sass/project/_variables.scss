@@ -1,0 +1,100 @@
+/* ! ===== Project Variables ===== */
+
+        $base-font-size: 16px; // Set this here, but don't echo it anywhere. Used in calculations 
+      $base-line-height: 28px; // Set this here, but don't echo it anywhere. Used in calculations 
+$base-line-height-ratio: ($base-line-height/$base-font-size); 
+
+/* Grid */
+     $total-max-width: 980px; // Needed for calculations and .container max-width
+        $grid-spacing: 1em; // Needed for _grid.scss
+     $grid-spacing-px: $base-font-size; 
+     $vert-grid-ratio: 1.5; 
+   $vert-grid-spacing: $vert-grid-ratio * 1em; 
+$vert-grid-spacing-px: $base-font-size * 1.5; 
+
+
+/* Color Palette Map */
+/*
+ * Use the function palette(palette-name,color-name) to fetch colors
+ * Supply at least a 'base' for each pallette, as that will be the default. 
+ * Create as many different pallettes (lists) as needed. 
+ */
+$palettes: (
+    
+    mono: (
+        x-dark: #202020,
+        dark: #363636,
+        mid-dark: #6f6f6f, 
+        base: #888, // We need one base value, so we can declare palette(mono) and not get an error
+        mid-light: #bbb,
+        light: #e6e6e6,
+        x-light: #f2f2f2
+    ),
+    
+    brand: (
+        base: #e81487, // hot pink
+        cyan: #3299ff,
+        
+    )
+);
+
+$white: #fff; 
+$black: #101010; 
+
+$primary: palette(brand); 
+$primary-dark: darken( $primary, 6% ); 
+
+$alert-high: #cc3333; 
+$alert-normal: #ffff88; 
+$code: #53a43c; 
+
+$default-color: palette(mono, mid-dark);
+$link-color: $primary-dark;
+$link-hover: palette(brand, cyan); 
+$border-color: palette(mono, light); 
+
+
+/* Background colors */
+$bg-color: palette(mono, mid-light); // The color of the body or HTML when the height of the content is not tall enough
+$mainsection-bg-color: palette(mono,x-light); // The bg color of the content area
+
+
+/* Typography */
+$relative-font-sizing       : true; /* True here means that all computed values will be in EMs */
+$round-to-nearest-half-line : true; /* Allows the adjust-font-size-to and lines-for-font-size mixins to round to the nearest half line height to avoid large spacing between lines. */
+
+$font-default               : 'Helvetica Neue', Helvetica, Arial, sans;
+$font-custom			    : Asap, $font-default; 
+$font-sans                  : $font-default; 
+$font-serif                 : Georgia, serif; 
+$font-monospace             : 'Source Code Pro', 'Anonymous Pro', Consolas, 'Envy Code R', 'Ubuntu Mono', Inconsolata-g, Inconsolata, monospace; 
+/* If using Google fonts, set the weights here */
+$normal-weight              : 400; 
+$bold-weight                : 700; 
+
+
+/* Sizes */
+$giga: 36px; 
+$mega: 32px; 
+$kilo: 28px; 
+$headerone: 24px;
+$headertwo: 22px;
+$headerthree: 20px;
+$headerfour: 18px;
+$headerfive: 16px;
+$headersix: 14px;
+
+
+/* ! ===== Input Types ===== */
+/* 
+ * Set all the up-and-coming input text types here for easier reference 
+ * Does not include types that are not meant to be displayed full width, such as: 
+        type=number, type=range, type=date, type=color
+ * Usage: \#{$form-text-input}
+ *
+ * http://www.w3.org/html/wg/drafts/html/master/forms.html#states-of-the-type-attribute
+ */
+$form-text-input: unquote('input[type="text"], input[type="password"], input[type="search"], input[type="email"], input[type="tel"], input[type="url"], input[type="number"]');
+$form-input-buttons: unquote('input[type="submit"], input[type="reset"], input[type="button"], button');
+$form-input-dates: unquote('input[type^="date"], input[type="month"], input[type="week"], input[type="time"]');
+$form-input-not-radio: unquote('input:not([type="radio"]):not([type="checkbox"])');

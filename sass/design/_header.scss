@@ -1,0 +1,20 @@
+/* ! ===== Header Styles ===== */
+
+/*<header class="main-header">
+    <div class="container">
+
+        <h1 class="main-header--title">Scaffold</h1>
+        
+        <!-- Allow Screen readers (hidden for all others) to skip the navigation and get to the main content -->
+        <div class="skip-link screen-reader-text">
+            <a href="#content" title="Skip to content">Skip to content</a>
+        </div>
+                    
+    </div><!-- end .container -->
+</header>*/
+.main-header {
+    padding: $vert-grid-spacing 0; 
+    background-color: $mainsection-bg-color; 
+    
+    &--title { @include headerone( $primary ); }
+}

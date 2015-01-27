@@ -1,0 +1,53 @@
+/* ! ===== Styles for TinyMCE ===== */
+
+@import 
+    "framework/config",     // Compass settings and default variables
+    "framework/functions",  // General functions consistent from project to project
+    "framework/mixins",     // General mixins consistent from project to project
+    "framework/reset";      // A modified HTML5-Boilerplate reset
+
+
+@import
+    "project/variables",       // Project variables, colors, etc...
+    "project/breakpoints";     // Breakpoint variables
+
+
+@include reset(); 
+
+
+@import 
+    "design/mixins",        // Project mixins
+    "design/extends",       // Project silent %extends
+    "design/typography";    // All styles needed to support good typography
+
+
+
+
+body {
+    color: $default-color;
+    background-color: $mainsection-bg-color; 
+    font: $normal-weight 100%/#{$base-line-height-ratio} $font-default; 
+}
+
+/*body*/ #tinymce { padding: 1em 1em 0; }
+
+img { 
+    display: block; 
+    margin: 0 auto; 
+}
+
+
+/* ! ===== Headers & Type Sizes ===== */
+
+.giga { @include pe-rem-helper( font-size, $giga ); }
+
+.mega { @include pe-rem-helper( font-size, $mega ); }
+
+.kilo { @include pe-rem-helper( font-size, $kilo ); }
+
+hr { 
+    border-top: 1px solid $border-color; 
+}  
+
+
+@include content-styles(); 

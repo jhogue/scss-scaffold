@@ -1,0 +1,116 @@
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    // Framework
+    // No CSS will be output
+    
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+@import 
+    "framework/config",     // Compass settings and default variables
+    "framework/functions",  // General functions consistent from project to project
+    "framework/mixins",     // General mixins consistent from project to project
+    "framework/reset";      // A modified HTML5 Boilerplate reset
+
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    // External Libraries that are mixins or functions
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//@import "libraries/super-gradient"; 
+
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    // Project base
+    
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+@import
+    "project/variables",       // Project variables, colors, etc...
+    "project/breakpoints";     // Breakpoint variables
+
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    // Output the CSS reset (start the CSS file)
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+@include reset(); 
+@include reset_additional(); 
+
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    // Project design. One file for each major set of elements
+    // Each file will output CSS
+    
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+@import 
+    "project/grid";            // Framework grid. Outputs a little bit of CSS
+
+@import 
+    "design/mixins",        // Project mixins
+    "design/extends",       // Project silent %extends
+    "design/layout",        // Apply the grid
+    "design/general",       // Top-level declarations (html, body, etc...)
+    "design/forms",
+    "design/typography",    // All styles needed to support good typography
+    "design/header",        // Page components
+    "design/navigation",    // Page components
+    "design/content",       // Page components
+    "design/sidebar",       // Page components
+    "design/footer";        // Page components. Add more as needed.
+
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    // Project Templates. These might override more global styles called previously. 
+    // Each file will output CSS
+    
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+@import 
+    "templates/home",
+    "templates/slideshows";
+
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    // External Libraries/Plugins that output CSS
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+@import "libraries/flexslider",
+        "libraries/magnific-popup"; 
+
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    // Communicating to Javascript
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+@include javascript_tag( 'navigation-drawer' ); 
+
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    // The bottom of the rendered CSS
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+@include html5boilerplate_helpers(); 
+// Hide @print styles from Old IE, they ignore the @print but see the styles inside. 
+@include not-oldIE() { @include html5boilerplate_print(); }
+
+
+// Keep this at the end because it can create a lot of CSS
+@import "design/fonts"; 
+
+
+/* 
+ * Remove for Production
+ *
+ * When we want to review the markup for W3 and similar errors, turn some of these on 
+ * Uses :not selectors a bunch, so only modern browsers will support them
+ */
+@import "framework/debug"; 
+    //@include heydon_rules; 
+    //@include debug_links;
+    //@include debug_images;
+    //@include debug_misc;
+    //@include debug_deprecated;
+    //@include debug_empty;

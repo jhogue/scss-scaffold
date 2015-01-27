@@ -1,0 +1,44 @@
+/*
+ * CSS declarations passed to browsers that DO NOT support media queries
+ * Targets IE 8 and lower
+ * 
+ * With our pe-media() mixin, simply set the $mq-support variable to false. 
+ * The mixin will handle the rest, and NO @media rules will be passed into this stylesheet. 
+ * 
+ * Also set $old-ie to true, and anything wrapped in the oldIE() mixin will get passed here as well. 
+ */
+
+$mq-support: false; 
+$old-ie: true; 
+@import "manifest";
+
+
+
+
+/* ! ===== Pass additional rules to Older browsers here ===== */
+
+/*
+ * Setting a max-width on images floated from TinyMCE? 
+ * Old IE will need these statements to replace the max-width values, which will be ignored 
+ */
+.typography {
+    
+    /* Adjust images in main-content. 
+     * CSS Attribute selectors dont work in old IE. 
+     * Make sure to make the JS active that selects images and adds these classes
+     */
+    .floatleft { float: left; }
+    .floatright { float: right; }
+}
+
+
+/* 
+ * IE uses a hexadecimal format for transparency 
+ * 00 is transparent and FF opaque 
+ * Luckily, SASS has a function for that... ie-hex-str( rgba( #color, $transparency) )
+ *
+.callout { 
+    background: transparent;
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#{ie-hex-str( rgba($primary, 0.7) )},endColorstr=#{ie-hex-str( rgba($primary, 0.7) )}); 
+    zoom: 1;
+}*/

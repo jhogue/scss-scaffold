@@ -1,0 +1,32 @@
+/* ! ===== Navigation Styles ===== */
+
+/*<nav class="mainnav mainnav__header">
+    <ul class="mainnav--list">
+        <li><a href="index.php" class="mainnav--link">Full HTMl Sample</a></li>
+        <li><a href="fixed-col.php" class="mainnav--link">Fixed Col/Fluid Neighbor</a></li>
+        <li><a href="forms.php" class="mainnav--link">Form Sample</a></li>
+    </ul>
+</nav>*/
+.mainnav {
+    text-align: center; 
+    
+    &--list { 
+        @extend %horizontal-list; 
+        
+        li { margin-right: -4px; }
+    }
+    
+    &--link {
+        display: block; 
+        color: $white; 
+        background-color: $primary;
+        line-height: 1.25; 
+        padding: .5em 1em .4em; 
+        
+        &:hover, 
+        &:focus {
+            color: palette(mono,dark);
+            background-color: palette(mono,x-light);  
+        }
+    }
+}

@@ -1,0 +1,32 @@
+/* the humans responsible & colophon */
+/* humanstxt.org */
+
+
+/* TEAM */
+	Company Name
+	Location: Providence, RI, USA
+	Site: http://www.team.com
+	Twitter: http://twitter.com/team
+	Facebook: http://facebook.com/team
+	
+	Creative Director: This Person
+	Twitter: http://twitter.com/personalsite
+	
+	Technology Director: That Person
+	Twitter: http://twitter.com/personalsite
+	
+	Designer: Someone Else
+	Twitter: http://twitter.com/personalsite
+	
+	Developers: A One and a Two and a Three
+	
+
+/* THANKS */
+	Names (& URL):
+
+
+/* SITE */
+	Standards: HTML5, CSS3, W3C (as much as possible)
+	Components: Modernizr, jQuery, Google fonts
+	Software: Adobe CS, Coda, Sublime Text, SASS and Compass, Vagrant, Terminal, Made on Macs
+	Hardware Stack: Server-side software, if relevant

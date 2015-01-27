@@ -1,0 +1,200 @@
+/* ! ===== Slideshows and Main Media Banners ===== */
+/*<section class="main-media" role="banner">
+    <div class="container">
+        <div class="slideshow slideshow__home" role="banner">
+            <div class="slideshow--wrapper flexslider js-slideshow">
+                <ul class="slides slideshow--list">
+                    <li class="slideshow--item">
+                        <figure class="slideshow--slide">
+                            <img src="http://www.woothemes.com/wp-content/themes/woo/images/flex/flexslider_a.jpg" alt="">
+                            <figcaption class="slideshow--caption">
+                                The Annunciation by John Townsend
+                            </figcaption>
+                        </figure>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>*/
+
+.slideshow {
+    
+    &--wrapper {}
+    
+    &--list {}
+    
+    &--item {}
+    
+    &--slide {
+        
+        img {}
+    }
+    
+    &--caption {
+        padding: $grid-spacing*5 $grid-spacing $grid-spacing; 
+    }
+}
+
+
+/*<ul class="flex-direction-nav">
+    <li>
+        <a class="flex-prev" href="#">
+            <span class="arrow--prev">
+                <span class="icon icon-chevron-left" aria-hidden="true"><span>&lt;</span></span>
+            </span>
+        </a>
+    </li>
+    <li>
+        <a class="flex-next" href="#">
+            <span class="arrow--next">
+                <span class="icon icon-chevron-right" aria-hidden="true"><span>&gt;</span></span>
+            </span>
+        </a>
+    </li>
+</ul>*/
+
+.flex-direction-nav {
+    @extend %pie-clearfix; 
+    *height: 0;
+}
+
+    .arrow--prev, 
+    .arrow--next { 
+        display: inline-block; 
+        padding: .75em .75em .125em;
+        color: palette(brand); 
+        background-color: palette(brand,darkblue); 
+        @include border-radius( 8px ); 
+        @include transition( all 250ms ease ); 
+        
+        .icon { margin-right: 0; }
+        
+        .icon:before { font-size: 2em; }
+        
+        a:hover &, 
+        a:focus & {
+            color: palette(brand,darkblue); 
+            background-color: palette(brand); 
+        }
+    }
+    
+    .flex-disabled { 
+        opacity: 0 !important; 
+        filter:alpha(opacity=0); 
+        cursor: default; 
+    }
+    
+    
+// Slideshow: Up to medium screens... Absolute positioning on the direction nav. 
+@include pe-media( $max: ($breakpoint-medium - .0625em), $serve-to-nomq: false ) {
+   
+   .flex-direction-nav {
+        position: absolute; 
+            top: 0; left: 0; right: 0; 
+        z-index: 100; 
+        width: 100%; 
+        
+        li { 
+            float: left; 
+            width: columns(6); 
+        }
+    } 
+    
+    .flex-prev, 
+    .flex-next { 
+        display: block; 
+        padding-top: 125%; // double 62.5%, which is an 8:5 ratio
+        margin: $grid-spacing $grid-spacing 0; 
+        text-align: left; 
+    }
+    
+    .flex-next { text-align: right; }
+}
+
+
+// Slideshow: Pad the caption and bring it in between the arrows
+@include pe-media( $min: $breakpoint-tiny, $max: ($breakpoint-small - .0625em), $serve-to-nomq: false ) {
+    
+    .slideshow {
+        
+        &--caption { 
+            width: columns(8); 
+            padding: $grid-spacing*2 0 $grid-spacing; 
+            margin: 0 auto; 
+        }
+    }
+}
+
+
+// Slideshow: Reset the above at a minimum of small screens
+@include pe-media( $min: $breakpoint-small, $max: ($breakpoint-medium - .0625em), $serve-to-nomq: false ) {
+    
+    .slideshow {
+        
+        &--caption { 
+            width: columns(8); 
+            padding-top: $grid-spacing; 
+        }
+    }
+    
+    .flex-direction-nav { 
+        top: 72%; left: columns(8); 
+        width: columns(4); 
+    }
+    
+    .flex-prev, 
+    .flex-next { 
+        padding-top: 0; 
+    }
+}
+
+
+// Slideshow: Make the image and caption side by each now
+@include pe-media( $breakpoint-medium ) {
+	
+	.slideshow {
+        
+        &--slide img { 
+            float: left; 
+            width: columns(8); 
+        }
+        
+        &--caption {
+            float: left; 
+            width: columns(4); 
+            padding: $grid-spacing;
+        }
+    }
+    
+    .flex-direction-nav { 
+        position: absolute; 
+            top: auto; left: columns(8); bottom: 0; 
+        z-index: 100; 
+        width: columns(4); 
+        
+        li { 
+            float: left; 
+            width: columns(6); 
+        }
+    }
+    
+    .flex-prev, 
+    .flex-next { 
+        display: block; 
+        margin: $grid-spacing; 
+        text-align: left; 
+    }
+    
+    .flex-next { text-align: right; }
+}
+
+
+// Slideshow: Increase padding around the caption
+@include pe-media( $breakpoint-large ) {
+	
+	.slideshow {
+        
+        &--caption { padding: $grid-spacing $grid-spacing*2; }
+    }
+}

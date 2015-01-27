@@ -1,0 +1,19 @@
+// Homepage .main-content... make headline and paragraphs into columns
+.home .content--main {
+    @extend %pie-clearfix;
+    
+    @include pe-media( $min: $breakpoint-small, $max: ($breakpoint-medium - .0625em), $serve-to-nomq: false ) {
+    	
+    	h1, h2, h3, h4 {
+        	float: left; 
+        	width: columns(4); 
+        	padding-right: $grid-spacing/2; 
+    	}
+    	
+    	p {
+        	float: right; 
+        	width: columns(8); 
+        	padding-left: $grid-spacing/2; 
+    	}
+    }
+}

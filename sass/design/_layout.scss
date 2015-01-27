@@ -1,0 +1,203 @@
+/* ! ===== Roll your own Grid ===== */
+
+/*
+    The concept here should be simple. 
+    With the box-model set to border-box in the reset, padding renders on the inside of an element. 
+    Therefore, column widths can be simple math AND we do not need to float the last element in a row right, 
+        nor remove a margin. 
+    More work to nest columns is needed in some cases, but the grid is dead simple: 
+    
+    Two columns     50% each
+    Three columns   33.3333% each
+    Four columns    25% each
+    Six columns     16.6666% each
+    Twelve columns  8.3333% each
+    
+    Use the columns() function to get a percentage for a number from 1 - 12, i.e. columns(4) 
+    Pass another total max columns if you want something different, i.e. columns(3,16)
+    
+    Example: 
+    <div class="container">
+        <h1 class="not-column">Title</h1>
+        <div class="two-col">
+            <div class="column"> Content </div>
+            <div class="column"> Content </div>
+        </div>
+    </div>
+    
+    <div class="container__tight">
+        <h1 class="not-column">Widgets</h1>
+        <div class="three-col">
+            <div class="column"> Content </div>
+            <div class="column"> Content </div>
+            <div class="column"> Content </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="default-col">
+            <article class="column" role="main"> Content </div>
+            <aside class="column" role="complementary"> Content </aside>
+        </div>
+    </div>
+*/
+
+// More settings in base/_grid.scss
+
+
+.two-col, 
+.four-col {
+    @extend %col-row; 
+    
+    .container__tight & { @extend %col-row-tight; }
+    
+    // At small sizes, make the two and four col pattern the same 
+    @include pe-media( $breakpoint-small ) {
+        
+        .column { 
+            float: left; 
+            width: columns(6); 
+            
+            &.pull-right { float: right; }
+        }
+        
+        // every other, starting at the third element 
+        .column:nth-of-type(2n+3) { clear: both; }
+    }
+}
+
+
+.four-col {
+    
+    // Redefine the four col structure to be four across 
+    @include pe-media( $breakpoint-large ) {
+        
+        .column { width: columns(3); }
+        
+        .column:nth-of-type(2n+3) { clear: none; } // reset the clear pattern from the two col structure 
+        
+        .column:nth-of-type(4n+5) { clear: both; }
+    }
+}
+
+
+.three-col, 
+.six-col {
+    @extend %col-row; 
+    
+    .container__tight & { @extend %col-row-tight; }
+    
+    // At small sizes, make the two and four col pattern the same 
+    @include pe-media( $breakpoint-medium ) {
+        
+        .column { 
+            float: left; 
+            width: columns(4); 
+            
+            &.pull-right { float: right; }
+        }
+        
+        // every third, starting with the fourth element 
+        .column:nth-of-type(3n+4) { clear: both; }
+    }
+}
+
+
+.six-col {
+    
+    // Redefine the three col structure to be six across 
+    @include pe-media( $breakpoint-large ) {
+        
+        .column { width: columns(2); } 
+        
+        .column:nth-of-type(3n+4) { clear: none; } // reset the clear pattern from the three col structure 
+        
+        // every sixth, starting with the seventh element 
+        .column:nth-of-type(6n+7) { clear: left; }
+    }
+}
+
+
+// Any asymmetrical pattern that you would like to support a main column and a sidebar
+.default-col {
+    @extend %col-row; 
+    
+    @include pe-media( $breakpoint-small ) {
+        
+        .column { 
+            float: left; 
+            
+            &.pull-right { float: right; }
+        }
+        
+        & > [role="main"] { width: 65%; }
+        
+        & > [role="complementary"] { width: 35%; }
+    }
+    
+    @include pe-media( $breakpoint-medium ) {
+        
+        & > [role="main"] { width: 70%; }
+        
+        & > [role="complementary"] { width: 30%; }
+    }
+}
+
+
+/*
+ * Fixed Single column with a fluid neighbor
+ * Based on http://stugreenham.com/demos/fluid-width-with-a-fixed-sidebar/
+ */
+
+/*<section class="fwf-col">
+    <aside class="fwf-fixed-left" role="complementary">
+        [...]
+    </aside>
+    <article class="fwf-wrapper main-content" role="main">
+        <div class="fwf-fluid-right">
+            [...]    
+        </div>
+	</article>
+</section>*/
+
+.fwf-col, .fwf-wrapper {
+    @extend %pie-clearfix; 
+}
+
+.fwf-col { padding-bottom: $vert-grid-spacing; }
+
+@include pe-media( $breakpoint-medium ) {
+    
+    $fwf-width: 300px; 
+    
+    .fwf-fixed-left, .fwf-fixed-right {
+        position: relative;
+        float: left;
+        width: $fwf-width;
+    }
+    
+    .fwf-fixed-left {
+        left: $fwf-width;
+    	margin-left: - $fwf-width;
+    }
+    
+    .fwf-fixed-right {
+        right: $fwf-width;
+    	margin-right: - $fwf-width;
+    }
+    
+    .fwf-wrapper {
+        float: left;
+    	width: 100%;
+    }
+    
+    $fwf-width-plus-gutter: $fwf-width + ($grid-spacing-px * 2); 
+    
+    .fwf-fluid-left {
+        margin-right: $fwf-width-plus-gutter; 
+    }
+    
+    .fwf-fluid-right {
+        margin-left: $fwf-width-plus-gutter; 
+    }
+}

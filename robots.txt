@@ -1,0 +1,9 @@
+User-agent: Googlebot
+Disallow: /*.htm$
+
+User-agent: Googlebot-Image
+Disallow: /*.gif$
+Disallow: /*.jpg$
+
+Disallow: https://www.sample.com/*
+Sitemap: http://www.sample.com/google/sitemap/

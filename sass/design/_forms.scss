@@ -1,0 +1,222 @@
+/* ! ==== Forms ==== */
+
+form { @extend %pie-clearfix; }
+
+fieldset { 
+    border: 0; 
+    border-top: 1px solid $primary; 
+    padding: $vert-grid-spacing/2 0; 
+}
+
+legend { 
+    display: inline-block; 
+    color: palette(mono); 
+    background-color: $white; 
+    font-weight: bold; 
+    padding: 0 .5em 0 0; 
+}
+
+label,
+.label {
+    display: inline-block; 
+    color: palette(mono); 
+    @include perem( margin-top, $grid-spacing-px/2 ); 
+}
+
+input, 
+textarea, 
+select,
+button,
+.button { @include form-element(); }
+
+.button { display: inline-block; }
+
+input,
+textarea { @extend %transition; }
+
+input, 
+textarea, 
+select {
+    color: palette(mono); 
+    width: 100%;
+    
+    &:focus {
+        //@include box-shadow( 0px 0px .75em rgba( $alert-low, 0.5 ) ); 
+        outline-width: 0;
+        //background-color: $alert-normal; 
+        //outline-color: rgba( $alert-normal, 0.5 );
+    }
+    
+    &[required]:focus, 
+    &[required=true]:focus, 
+    &[required="required"]:focus {
+        //@include box-shadow( 0px 0px .75em rgba( $alert-high, 0.5 ) );
+        outline-width: 0; 
+        //background-color: desaturate( lighten($alert-high, 8%), 12%); 
+        //outline-color: rgba( $alert-high, 0.5 )
+    }
+}
+
+select, 
+input[type=checkbox], 
+input[type=radio] { width: auto; }
+
+input[type=checkbox], 
+input[type=radio] {
+    border: none; 
+    //margin-right: .75em; 
+}
+
+select option { padding: .25em; }
+
+textarea { 
+    overflow: auto; 
+    resize: vertical; 
+}
+
+button[disabled],
+.button.disabled, 
+input[disabled],
+select[disabled],
+select[disabled] option,
+select[disabled] optgroup,
+textarea[disabled] {
+    -moz-user-select: -moz-none; 
+    -webkit-user-select: none; 
+    -khtml-user-select: none; 
+    user-select: none; 
+    cursor: default; 
+}
+
+::-webkit-input-placeholder  { color: palette(mono,mid-light); font-style: italic; }
+::-moz-placeholder { color: palette(mono,mid-light); font-style: italic; }
+:-ms-input-placeholder { color: palette(mono,mid-light); font-style: italic; }
+
+
+/* ! ===== Special rules for older Safari and iOS ===== */
+input[type="search"],
+input[type="email"],
+input[type="url"],
+input[type="tel"],
+input[type="number"] { -webkit-appearance: textfield; }
+
+
+/* ! ===== Form element styles ===== */
+
+#{$form-input-buttons}, .button {
+    @extend %transition; 
+    font-weight: $bold-weight; 
+    cursor: pointer; 
+    width: auto; 
+    padding: .45em 1em .3em; 
+}
+
+.primary-action,
+.secondary-action {}
+
+.primary-action,
+.primary-action.disabled:hover,
+.primary-action.disabled:focus,
+.primary-action.disabled:active {
+    color: $white; 
+    border: 2px solid $primary; 
+    @include vertical-gradient( lighten( $primary, 6% ), darken( $primary, 6% ) ); 
+}
+
+    .primary-action.disabled, 
+    .primary-action.disabled:hover,
+    .primary-action.disabled:focus,
+    .primary-action.disabled:active {
+        cursor: not-allowed; 
+        opacity: .5; 
+    }
+    
+    .primary-action:hover, 
+    .primary-action:focus, 
+    .primary-action:active,
+    .primary-action.selected {
+        color: $black; 
+        @include vertical-gradient( darken( $primary, 6% ), lighten( $primary, 6% ) ); 
+    }
+
+
+// Keep this here so if we add a style above, we can remember to change it here as well. 
+// "no" accepted as a value to pass through. Will not override if "no" is present. 
+@mixin reset-button-styles( $color: $white, $border: 0, $solid-bg: $grey ) {
+    @if $color != no { color: $color; }
+    @if $border != no { border: $border; }
+    @if $solid-bg != no { @include reset-gradient( $solid-bg ); }
+}
+
+
+.secondary-action,
+.secondary-action.disabled:hover,
+.secondary-action.disabled:focus,
+.secondary-action.disabled:active {
+    color: palette(mono,base); 
+    border: 2px solid palette(mono,light); 
+    @include vertical-gradient( palette(mono,x-light), darken(palette(mono,light), 3%) ); 
+}
+
+    .secondary-action.disabled, 
+    .secondary-action.disabled:hover,
+    .secondary-action.disabled:focus,
+    .secondary-action.disabled:active { 
+        cursor: not-allowed; 
+        opacity: .5; 
+    }
+
+    .secondary-action:hover, 
+    .secondary-action:focus, 
+    .secondary-action:active,
+    .secondary-action.selected {
+        color: $primary; 
+        @include vertical-gradient( darken(palette(mono,light), 3%), palette(mono,x-light) ); 
+    }
+
+
+/* ! ===== General forms ===== */
+
+.form {
+    
+    &--legend {}
+    
+    &--input-group { padding-bottom: $vert-grid-spacing/2; }
+    
+    &--input,
+    &--textarea {
+        
+        &:focus { border-color: palette(mono,mid-light); }
+    }
+    
+    &--input {}
+    
+    &--textarea {}
+    
+    &--select {}
+    
+    label.check, 
+    label.radio { cursor: pointer; } // make labels look clickable when they are
+    
+    &--group { padding-bottom: $vert-grid-spacing; }
+    
+    // Media
+    @include pe-media( $breakpoint-medium ) {
+    	
+    	&--input-group { 
+        	@include clearfix(); 
+        	clear: left; 
+        	
+        	label, 
+        	.form--input, 
+        	.form--textarea { float: left; }
+        	
+        	label { width: 25%; }
+        	
+        	.form--input, 
+        	.form--textarea { width: 75%; }
+        }
+    	
+    	
+    }
+}

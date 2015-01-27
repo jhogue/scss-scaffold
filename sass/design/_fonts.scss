@@ -1,0 +1,28 @@
+/*
+ * Add your fonts here. I suggest, when possible, to encode a font file directly into the CSS
+ * using Base64 encoding. IcoMoon offers this as an option under Preferences when exporting.
+ *
+ * Keep the modification below everything else. 
+ * Modify the .icon-font() mixin so you can apply the icons to other elements in cases where
+ * you can't directly apply a class name to markup. 
+ * 
+ * Icon markup should be: <span class="icon icon-SPECIFIC" aria-hidden="true"></span>
+ */
+
+
+/* ! ===== Our modifications ===== */
+
+.icon { @include icon-font(); }
+
+
+// More about the rules below here: http://test.highchairdesign.com/nested-spans/
+
+// Hide a backup Unicode character (if present) by default 
+// <span class="icon icon-navicon" aria-hidden="true"><span>&equiv;</span></span>
+.icon span { @include hide(); }
+
+// Hide from anything that does not support FontFace (Opera Mini, Blackberry) or SVG (Android 2.1 - 2.3) 
+// @requires: modernizr.js and the fontface, svg tests
+.no-fontface.no-svg .icon:before { @include hide(); }
+
+.no-fontface.no-svg .icon span { @include show( 'inline-block' ); }

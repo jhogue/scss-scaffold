@@ -1,0 +1,134 @@
+/*
+ * Mixins and elements for this specific project
+ */
+
+@mixin box-default( $padding: .25em .65em .15em ) {
+    display: inline-block; 
+    padding: $padding; 
+    //@include vertical-gradient( $grey-lightest, $grey-lighter );
+    @include border-radius(); 
+}
+
+@mixin form-element() {
+    @extend %transition; 
+    padding: .3em .5em .125em; 
+    background-color: $white; 
+    border: 1px solid palette(mono,light); 
+    @include border-radius();  
+}
+
+@mixin relative-container( $zindex: 1 ) {
+    position: relative; 
+    z-index: $zindex; 
+    overflow: hidden; 
+}
+
+@mixin common-transition {
+    @include transition( .3s all ease-in-out ); 
+}
+
+// Consistent Drop Shadow effect – equal offset for right and bottom 
+@mixin dropshadow( $opacity: .4 ) {
+    @include box-shadow( .125em .125em .25em rgba( $black, $opacity ) ); 
+    
+    @include oldIE() {
+        @include has-layout;
+        filter: progid:DXImageTransform.Microsoft.Shadow(color='#{ie-hex-str(rgba( $black, $opacity ))}', Direction=135, Strength=3); 
+    }
+}
+@mixin remove-dropshadow() {
+    @include box-shadow( none ); 
+    
+    @include oldIE() { filter: progid:DXImageTransform.Microsoft.Shadow(enabled = false); }
+}
+
+
+@mixin hide() {
+    display: none; 
+    visibility: hidden;
+}
+
+@mixin show( $display: block ) {
+    display: $display; 
+    visibility: visible;
+}
+
+
+// Useful when declaring the icon font outside of using the .icon class
+@mixin icon-font( $margin: true ) {
+	font-family: 'icons';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+    @if ( $margin == true ) { margin-right: .25em; }
+    @include pe-inline-block( baseline ); 
+    
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale; 
+	
+	span { vertical-align: baseline; }
+}
+
+
+/* 
+ * Headers. 
+ * We use mixins so we can manage these in one place. 
+ * Used in typography.scss and mce.scss 
+ */
+@mixin headerone( $thiscolor: $primary-dark ) {
+    color: $thiscolor;
+    @include pe-rem-helper( font-size, $headerone );
+    @include pe-rem-helper( line-height, $base-line-height );
+    
+    a { color: $thiscolor; }
+}
+
+@mixin headertwo( $thiscolor: $primary-dark ) {
+    color: $thiscolor;
+    font-weight: $bold-weight; 
+    @include pe-rem-helper( font-size, $headertwo );
+    @include pe-rem-helper( line-height, $base-line-height );
+
+    a { color: $thiscolor; }
+}
+
+@mixin headerthree( $thiscolor: $primary-dark ) {
+    color: $thiscolor;
+    font-weight: $bold-weight; 
+    @include pe-rem-helper( font-size, $headerthree );
+    @include pe-rem-helper( line-height, $base-line-height );
+    
+    a { color: $thiscolor; }
+}
+
+@mixin headerfour( $thiscolor: $primary-dark ) {
+    color: $thiscolor;
+    @include pe-rem-helper( font-size, $headerfour );
+    @include pe-rem-helper( line-height, $base-line-height );
+    
+    a { color: $thiscolor; }
+}
+
+@mixin headerfive( $thiscolor: $primary-dark ) {
+    color: $thiscolor;
+    font-weight: $bold-weight; 
+    letter-spacing: .0625em; 
+    @include pe-rem-helper( font-size, $headerfive );
+    @include pe-rem-helper( line-height, $base-line-height );
+    
+    a { color: $thiscolor; }
+}
+
+@mixin headersix( $thiscolor: $primary-dark ) {
+    color: $thiscolor;
+    text-transform: uppercase; 
+    letter-spacing: .0625em; 
+    @include pe-rem-helper( font-size, $headersix );
+    @include pe-rem-helper( line-height, $base-line-height );
+    
+    a { color: $thiscolor; }
+}

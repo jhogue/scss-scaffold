@@ -1,0 +1,322 @@
+/* ! ===== Elements inside .typography — Anywhere we want very pretty, readable type styles ===== */
+
+@mixin content-styles() {
+    
+    h1 { 
+        @include headerone();
+        text-shadow: 0px -1px 1px #fff; 
+        @include pe-rem-helper( margin-top, 42px );
+        @include pe-rem-helper( margin-bottom, 32px );
+    }
+
+    h2 { 
+        @include headertwo(); 
+        @include pe-rem-helper( margin-top, 40px );
+        @include pe-rem-helper( margin-bottom, 30px );
+    }
+    
+    h3 { 
+        @include headerthree(); 
+        @include pe-rem-helper( margin-top, 26px );
+        @include pe-rem-helper( margin-bottom, 2px ); 
+    }
+    
+    h4 { 
+        @include headerfour();
+        @include pe-rem-helper( margin-top, 26px ); 
+        @include pe-rem-helper( margin-bottom, 2px );
+    }
+    
+    h5 { 
+        @include headerfive(); 
+        @include pe-rem-helper( margin-top, 26px ); 
+        @include pe-rem-helper( margin-bottom, 2px ); 
+    }
+    
+    h6 { 
+        @include headersix();
+        @include pe-rem-helper( margin-top, 4px ); 
+    }
+    
+    p, ul, ol, address, form, table, figure {
+        //@include pe-fontsize( $base-font-size, $base-line-height );
+        line-height: $base-line-height-ratio; 
+        @include pe-rem-helper( font-size, $base-font-size ); 
+        @include pe-rem-helper( margin-bottom, $base-line-height/2 ); 
+    }
+    
+    
+    @include pe-media( $max: $breakpoint-small ) {
+    	
+    	h1 { @include pe-rem-helper( font-size, $headertwo ); }
+    	
+    	h2 { @include pe-rem-helper( font-size, $headerthree ); }
+    	
+    	h3 { @include pe-rem-helper( font-size, $headerfour ); }
+    }
+    
+    
+    p:empty { display: none; }
+    
+    dl, 
+    form, 
+    table { clear: both; }
+    
+    // Remove margin when lists are nested
+    li ul, 
+    li ol { margin-bottom: 0; }
+    
+    p, 
+    dd, 
+    blockquote, 
+    address { @include pe-hyphenate(); }
+    
+    a {
+        text-decoration: underline; 
+        
+        &:hover, &:focus { 
+            color: palette(mono,dark); 
+            text-decoration: none;
+        }
+        
+        &[href^="tel:"] {
+            color: $default-color; 
+            border-bottom: 2px dotted $link-color; 
+            
+            &:hover, 
+            &:focus { color: $link-color; }
+        }
+    }
+    
+    // Even though we prefer blockquote within a figure, TinyMCE won't do that, so don't plan on it 
+    blockquote {
+        position: relative; 
+        
+        p {
+            color: palette(brand,cyan); 
+            font-family: $font-serif; 
+            font-style: italic; 
+            @include pe-rem-helper( font-size, 18px ); 
+            @include pe-rem-helper( line-height, $base-line-height ); 
+            @include pe-rem-helper( padding-left, 32px ); 
+        }
+        
+        > * { margin-top: 0; }
+        
+        cite, em, i { font-style: normal; }
+        
+        p:before, 
+        p:last-child:after {
+            color: lighten(palette(brand,cyan), 20%);
+            font-style: normal; 
+            font-weight: $bold-weight; 
+            line-height: 1; 
+            @include pe-rem-helper( font-size, 48px ); 
+        }
+        
+        p:before {
+            content: "“";
+            position: absolute;
+                top: 0; left: .0625em; 
+        }
+        
+        p:last-child:after {
+            display: inline; 
+            content: "”";
+            line-height: 0;
+            vertical-align: text-bottom;
+            margin-left: .125em;
+            
+            .ie9 &,
+            .gte-ie10 & { line-height: .25; vertical-align: bottom; }
+        }
+    }
+    
+    // Figure
+    figure {
+        
+        img { @include pe-rem-helper( margin-bottom, 13px ); }
+        
+        figcaption {
+            text-align: center; 
+            font-style: italic; 
+            line-height: 1.5; 
+            @include pe-rem-helper( font-size, 14px ); 
+        }
+    }
+    
+    // Inline typography elements
+    strong, b, 
+    em, i, cite, 
+    small,
+    sup, sup, var { letter-spacing: .03125em; }
+    
+    cite, 
+    abbr[title], 
+    dfn[title] { border-bottom: 1px dotted $primary; }
+    
+    cite a { text-decoration: none; }
+    
+    abbr[title] {
+        text-transform: uppercase;
+        letter-spacing: 0.125em; 
+        @include pe-rem-helper( font-size, 13px ); 
+    }
+    
+    var { 
+        color: palette(mono,dark);
+        font-style: italic; 
+    }
+    
+    // Proper code blocks need to be surrounded by a <pre>. They work together. 
+    pre {
+        margin-bottom: 1em; 
+    	
+    	code {
+        	display: block; 
+            padding: 1em; 
+            margin: 0; 
+            border-left: 5px solid $code; 
+            border-bottom: 1px solid #f0f0f0; 
+            @include border-radius( 0 ); 
+            @include border-right-radius(); 
+    	}
+    }
+    
+    code, 
+    kbd, 
+    samp,
+    mark,
+    ins { 
+        display: inline-block; 
+        line-height: 1.25; 
+        padding: .25em .25em .125em; 
+        margin: 0 -.0625em; 
+    }
+    
+    code, kbd {
+        background: palette(mono,x-light); 
+        background: rgba( #000, .05 ); 
+        @include box-shadow( 0 0 .25em rgba( #000, .1 ) inset ); 
+        @include border-radius(); 
+    }
+    
+    code { color: $code; }
+    
+    samp { background-color: palette(mono,light); }
+    
+    mark { background-color: lighten($alert-normal, 8%); }
+    
+    strike, s { color: palette(mono,mid-light); }
+    
+    del { color: $alert-high; }
+    
+    u { text-decoration: underline; }
+    
+    ins { 
+        color: palette(mono,x-dark); 
+        background-color: palette(mono,light); 
+        text-decoration: none; 
+    }
+    
+    /* images from TinyMCE
+    .alignleft { float: left; }
+    
+    .alignright { float: right; }
+    
+    .alignleft, 
+    img[style='float: left;'] {
+        max-width: 35%; 
+        margin-right: 1em; 
+        margin-bottom: .5em; 
+    }
+    .alignright, 
+    img[style='float: right;'] {
+        max-width: 35%; 
+        margin-left: 1em; 
+        margin-bottom: .5em; 
+    } */
+    
+    // Prettier tables if authors use the correct elements
+    table {
+        
+        caption {
+            caption-side: top;
+            color: $default-color;
+            font-size: px2em( 18px ); 
+            text-align: left;
+            @include pe-rem-helper( margin-bottom, $base-line-height ); 
+        }
+        
+        thead, 
+        tfoot { border-bottom: 2px solid palette(mono,mid-light); }
+       
+        tr {
+            background-color: #f3f3f3; 
+            
+            & th { background-color: $white; }
+        }
+        
+        tr:nth-child(odd) { background-color: #efefef; }
+        
+        th, 
+        td {
+            padding: .25em .5em .2em; 
+            border-left: 2px solid $mainsection-bg-color; 
+            
+            &:first-child { border-left: none; }
+        }
+        
+        td { border-bottom: 1px solid $mainsection-bg-color; }
+        
+        tfoot { border-top: 1px solid $border-color; }
+    } 
+    
+    // Definition List
+    dl {
+        border-left: 1px solid $border-color;  
+        border-right: 1px solid $border-color; 
+        border-bottom: 1px solid $border-color; 
+        @include pe-rem-helper( margin-top, -8px ); 
+        @include pe-rem-helper( margin-bottom, 24px );
+        
+        dt, dd { 
+            margin-bottom: 0; 
+            padding-left: $grid-spacing; 
+            padding-right: $grid-spacing; 
+            @include pe-rem-helper( padding-top, 8px ); 
+            @include pe-rem-helper( padding-bottom, 6px ); 
+        }
+        
+        dt {
+            font-weight: $bold-weight; 
+            color: darken( $default-color, 4% ); 
+            border-top: 1px solid $border-color; 
+            border-bottom: 1px solid $border-color; 
+        }
+        
+        dd {
+            @include pe-rem-helper( padding-top, 7px ); 
+            @include pe-rem-helper( padding-bottom, 4px ); 
+        }
+        
+        dt + dt { border-top: 0; }
+    }
+    
+    // Pretty forms
+    form {
+        
+        .horizontal-list {
+            
+            li { margin-right: 1em; }
+        }
+        
+        .element-caption { color: palette(mono,mid-light); }
+    }
+    
+    fieldset { 
+        border-top: 1px solid $border-color; 
+        
+        legend { }
+    }
+}

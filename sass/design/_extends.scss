@@ -1,0 +1,36 @@
+/* ! ===== Placeholder definitions to use with @extend ===== */
+
+/* Consider carefully when creating an @extend. 
+ * "Should this be a mixin that I can pass variables to?"
+ * A mixin will create repeated groups of markup throughout the stylesheet, and while 
+ * it might be more advantageous to group elements that share rules together with @extend, 
+ * @extend puts rules in one place which may make it harder to override when needed. 
+ * 
+ * Performance-wise, when things get g-zipped on the server, one is not better than the other
+ * 
+ * Consider: http://csswizardry.com/2014/11/when-to-use-extend-when-to-use-a-mixin/
+ */
+
+%horizontal-list {
+    
+    li { display: inline-block; }
+    
+    .lt-ie8 & { display: inline; }
+}
+
+// This mixin creates a lot of CSS, so I like to group them. I also rarely need to override it. 
+%pie-clearfix { 
+    @include pie-clearfix; 
+}
+
+
+// Replaces the text-indent: -9999 trick. Works only on an independent element
+%hide-text {
+    width: 0; 
+    white-space: nowrap; 
+    overflow: hidden;
+}
+
+
+// Also a lot of vendor-specific rules that I rarely need to override
+%transition { @include transition(); }

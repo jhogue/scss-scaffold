@@ -1,0 +1,107 @@
+/* ! ===== Footer styles ===== */
+
+/*<footer id="sitemap" class="main-footer" role="navigation">
+    <div class="container">
+        <div class="copyright">
+            <p><span class="pre">©2015 J. Hogue SCSS Scaffold. MIT License.</span></p>
+        </div>
+    </div>
+</footer>*/
+.main-footer {
+    @extend %pie-clearfix; 
+    clear: both; 
+    padding: $vert-grid-spacing 0; 
+}
+
+
+.copyright {
+    padding-top: $vert-grid-spacing; 
+    text-align: center; 
+}
+
+
+
+/*
+ * Warnings for browsers. Keep these for all projects. 
+ 
+<div id="nojs" class="typography do-not-print">
+    <h1>Whoops! <em>No Javascript&#x203d;</em></h1>
+    <p>Javascript is essential for a complete experience with this laboratory toolkit. Please enable Javascript on this device or visit with a more capable device for the full experience. </p>
+    <p>If you think that javascript <em>should</em> be available, check your browser settings or force a fresh reload of this page. <kbd>&#8984; F5</kbd> in most Windows applications, or <kbd>&#8679;&#8984; R</kbd> or <kbd>&#8984; R</kbd> in most browsers. For more information on cache, visit <a href="//www.refreshyourcache.com/en/cache/">refreshyourcache.com/en/cache/</a></p>
+</div>
+ 
+ */
+#nojs, 
+#oldie {
+	color: palette(mono,dark);
+	padding: $grid-spacing $grid-spacing 0; 
+	
+	p { 
+    	text-align: center; 
+    	padding-bottom: 1em; 
+    	margin: 0; 
+    }
+	
+	a {
+    	color: palette(mono,dark);
+    	text-decoration: underline; 
+    	
+    	&:hover, 
+    	&:focus {
+        	color: palette(mono,x-dark);  
+        	text-decoration: none; 
+    	}
+	}
+}
+
+
+.js #nojs { display: none; visibility: hidden; }
+
+
+#nojs {
+    background-color: $alert-high; 
+    background: repeating-linear-gradient(
+        45deg,
+        lighten($alert-high,2),
+        lighten($alert-high,2) 6px,
+        lighten($alert-high,6) 6px,
+        lighten($alert-high,6) 12px
+    );
+    
+    &,
+    a,
+    a:hover,
+    a:focus { color: $white; }
+}
+
+
+/*<!--[if lt IE 8]>
+    <div id="oldie" class="typography do-not-print">
+    <![endif]-->
+        <!--[if IE 6]>
+        <p>Your browser is <em>ancient</em> and <a href="//www.modern.ie/en-us/ie6countdown">Microsoft agrees</a>. <a href="//browsehappy.com/">Upgrade or download a new browser</a> to experience a better web. </p>
+        <![endif]-->
+        <!--[if IE 7]>
+        <p>Internet Explorer version 7 is not supported by this site, and your experience with the content may be hindered by poor performance and/or lack of design support. <a href="//browsehappy.com/">Upgrade or download a new browser</a> to experience a better web. </p>
+        <![endif]-->
+    <!--[if lt IE 8]>
+        <p>Not sure what a browser is? <a href="//whatbrowser.org">This site explains it all very nicely</a>.</p>
+    </div>
+    <![endif]-->*/
+
+#oldie {
+    color: palette(mono,dark);
+    background-color: $alert-normal; 
+    background: repeating-linear-gradient(
+        45deg,
+        $alert-normal,
+        $alert-normal 6px,
+        adjust_hue(darken($alert-normal, 12), 354) 6px,
+        adjust_hue(darken($alert-normal, 12), 354) 12px
+    );
+    
+    &,
+    a,
+    a:hover,
+    a:focus { color: palette(mono,dark); }
+}

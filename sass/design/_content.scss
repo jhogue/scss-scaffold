@@ -1,0 +1,146 @@
+/* ! ===== Content Styles ===== */
+
+
+/* Want to test/debug vertical rhythm? 
+ * http://compass-style.org/reference/compass/layout/grid_background/ 
+ * Set $show-baseline-grid-backgrounds to true; 
+ *
+ * To tweak the base font size and line height according to the width of the reading container, try this calculator:
+ * http://www.pearsonified.com/typography/
+ */
+$grid-background-baseline-height: $base-line-height/2; 
+$grid-background-baseline-color: rgba( $code, .4 ); 
+$grid-background-offset: 0px; 
+$show-baseline-grid-backgrounds: true; 
+
+
+.vert-rhythm {
+    @include baseline-grid-background(); 
+    background-position: left $grid-background-offset; 
+}
+
+
+.typography {
+    color: $default-color; 
+    
+    
+    @include content-styles(); 
+    
+    
+    // In addition to the typography styles
+    & > h1:first-child { 
+        margin-top: 0; 
+        @include pe-rem-helper( padding-top, 4px );
+    }
+    
+    label.active { color: $default-color; }
+} 
+
+
+// Same as content-styles() p, ul, etc...
+.default-typography {
+    line-height: $base-line-height-ratio; 
+    @include pe-rem-helper( font-size, $base-font-size ); 
+    @include pe-rem-helper( margin-bottom, $base-line-height/2 ); 
+}
+
+
+/*<section id="content" class="content">
+    <div class="container">
+        <article class="content--main" role="main">
+
+		</article>
+    </div>
+</section>*/
+.content {
+    padding: $vert-grid-spacing 0; 
+    background-color: $mainsection-bg-color; 
+    
+    &--main {}
+}
+
+
+/* Sample grid styles to see the columns */
+/*body*/ .grid-sample {
+    
+    .typography h2 { color: palette(brand,cyan); }
+    
+    .column {
+        
+        &--content {
+            background-color: $white; 
+            border: 1px solid $border-color; 
+            padding: 0 $grid-spacing $vert-grid-spacing; 
+        }
+    }
+}
+
+.fwf-col {
+    
+    .typography h2 { color: palette(brand,cyan); }
+            
+    .typography {
+        background-color: $white; 
+        border: 1px solid $border-color; 
+        padding: 0 $grid-spacing $vert-grid-spacing; 
+    }
+}
+
+
+/* Sammple forms */
+.horizontal-list { @extend %horizontal-list; }
+
+
+/* ! ===== Breadcrumbs ===== */
+/*<div class="breadcrumbs">
+    <a class="breadcrumbs--link" href="projects.php">Projects</a>
+    <span class="breadcrumbs--sep">&raquo;</span>
+    <span class="breadcrumbs--link breadcrumbs--link__active">Recent Projects</span>
+</div>*/
+.breadcrumbs {
+    
+    & > * {}
+    
+    &--link,
+    &--link__active {}
+    
+    &--link {
+        
+        &:hover, &:focus {}
+    }
+}
+
+
+/* ! ===== Pagination ===== */
+/*<footer class="pagination">
+    <ul class="pagination--list menu">
+        <li class="pagination--listitem"><a class="pagination--link pagination--link__prev" href="/www/news/page/1" title="View Newer Posts">◀</a></li>
+        <li class="pagination--listitem"><a class="pagination--link pagination--link__disabled" href="/www/news/page/1">1</a></li>
+        <li class="pagination--listitem"><a class="pagination--link" href="/www/news/page/2">2</a></li>
+        <li class="pagination--listitem"><a class="pagination--link pagination--link__next" href="/www/news/page/2" title="View Older Posts">▶</a></li>                                        
+    </ul>
+</footer>*/
+.pagination {
+    
+    &--list {}
+    
+    &--listitem { margin: 0 .5em; }
+    
+    &--link {
+        
+        &:hover, 
+        &:focus {}
+        
+        // Overrides
+        &__prev, 
+        &__next {
+            
+            &:hover, 
+            &:focus {}
+        }
+        
+        &__disabled:hover, 
+        &__disabled:focus, 
+        &__disabled {}
+    }
+}
