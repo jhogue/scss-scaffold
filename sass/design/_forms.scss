@@ -59,7 +59,8 @@ select {
 
 select, 
 input[type=checkbox], 
-input[type=radio] { width: auto; }
+input[type=radio],
+input[type=image] { width: auto; }
 
 input[type=checkbox], 
 input[type=radio] {
