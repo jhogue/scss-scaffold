@@ -74,11 +74,13 @@
 
 
 /*
- * Calculate the width of a column based on our 12-column grid
- * @accepts a number from 1 - 12
+ * Calculate the width of a column based on any number of columns grid
+ * @accepts a number from 1 - infinity
  * @returns: percent value
+ * @requires: Project cols variable. Default supplied to prevent failure. 
  */
-@function columns( $colnumber, $totalcols: 12 ) {
+$project-columns: 12 !default; 
+@function columns( $colnumber: 1, $totalcols: $project-columns ) {
     // 100 divided by the total number of cols divided by the number of columns that we want. 
     // Example, 12/3 = 4... 100/4 * 1% = 25%
     @return ( 100/( $totalcols/$colnumber ) ) * 1%; 

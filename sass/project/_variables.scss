@@ -6,6 +6,7 @@ $base-line-height-ratio: ($base-line-height/$base-font-size);
 
 /* Grid */
      $total-max-width: 980px; // Needed for calculations and .container max-width
+     $project-columns: 12; // Typically 12 or 16
         $grid-spacing: 1em; // Needed for _grid.scss
      $grid-spacing-px: $base-font-size; 
      $vert-grid-ratio: 1.5; 
