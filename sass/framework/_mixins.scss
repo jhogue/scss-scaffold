@@ -264,6 +264,17 @@ $font-size-adjust: 0.465;
     }
 }
 
+/* Use IE-specific expressions for min-width in older IE */
+// IE8 and greater support min-width
+@mixin pe-minwidth( $value ) {
+    min-width: $value; 
+    @if $legacy-support-for-ie6 or $legacy-support-for-ie7 {
+        @include oldIE() {
+            width: expression(this.width < $value ? $value: true); 
+        }
+    }
+}
+
 
 /* 
  * Cross browser method to apply word-breaking and hyphenation (where supported) 
