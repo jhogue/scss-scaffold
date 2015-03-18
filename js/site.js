@@ -8,33 +8,48 @@
 
 
 /*
- * Set Modernizr variables that any script can check against. 
+ * Set Modernizr variables that any script can check against.
  */
 var hastouch = has_feature( "touch" ),
     hasplaceholder = has_feature( "placeholder" ),
     hasboxsizing = has_feature( "boxsizing" ),
     is_ltie9 = has_feature( "lt-ie9" );
 
-//console.log( "hastouch=" + hastouch ); 
-//console.log( "hasplaceholder=" + hasplaceholder ); 
-//console.log( "hasboxsizing=" + hasboxsizing ); 
+if( !window.Retina ) {
+    var is_retina = false;
+    $("html").addClass( "no-retina" );
+} else {
+    var is_retina = Retina.isRetina();
+    if ( is_retina ) {
+        $("html").addClass( "retina" );
+    } else {
+        $("html").addClass( "no-retina" );
+    }
+}
+
+//console.log( "hastouch=" + hastouch );
+//console.log( "hasplaceholder=" + hasplaceholder );
+//console.log( "hasboxsizing=" + hasboxsizing );
 //console.log( "is_ltie9=" + is_ltie9 );
-
-
-/* Variables to set to true later and check */
-var loadpopups_loaded = false;
 
 
 /*
  * "Watch" the body:after { content } to find out how wide the viewport is.
  * Thanks to http://adactio.com/journal/5429/ for details about this method
  */
-if ( is_ltie9 ) { 
-    var mq_tag = ''; 
-} else {
-    var mq_tag = window.getComputedStyle(document.body,':after').getPropertyValue('content'); 
+function mqtag( is_ltie9 ) {
+    if ( is_ltie9 ) {
+        return false;
+    } else {
+        return window.getComputedStyle(document.body,':after').getPropertyValue('content');
+    }
 }
+var mq_tag = mqtag( is_ltie9 );
 //console.log( "mq_tag=" + mq_tag );
+
+
+/* Variables to set to true later and check */
+var loadpopups_loaded = false;
 
 
 /* 
@@ -45,46 +60,11 @@ function on_resize_orientationchange() {
     
     		
 	// Check again on resize/orientation change
-    if ( is_ltie9 ) { 
-        var mq_tag = ''; 
-    } else {
-        var mq_tag = window.getComputedStyle(document.body,':after').getPropertyValue('content'); 
-    }
-    
-    
-    /* Initiate Magnific Popup */
-    /*if ( mq_tag.indexOf("mediamodals") !=-1 && ! loadpopups_loaded ) {
-        
-        // Initialize more than one on a page
-        $('.js-popup').each( function() {
-            
-            $(this).magnificPopup({
-                disableOn: 480, // disable this plugin when window width is less that number
-                delegate: 'a',
-                type: 'image',
-                gallery: {
-                    enabled: true, // set to true to enable gallery
-                    preload: [1,2], // load one previous and 2 next objects
-                    navigateByImgClick: true,
-                    
-                    // Optional... leave these off to use default markup
-                    arrowMarkup: '<button title="%title%" type="button" class="mfp-arrow mfp-arrow-%dir%"></button>', 
-                    tPrev: 'Previous (Left arrow key)', // title for left button
-                    tNext: 'Next (Right arrow key)', // title for right button
-                    tCounter: '<span class="mfp-counter">%curr% of %total%</span>' // title for counter
-                }
-            });
-            
-        }); 
-        loadpopups_loaded = true; 
-    
-    } else {
-        
-        $('.js-popup .js-popup-trigger').click(function(event) {
-            event.preventDefault();
-        }); 
-    }*/
-    
+    var mq_tag = mqtag( is_ltie9 );
+    //console.log( "mq_tag=" + mq_tag );
+
+
+    /* Any logic that needs to refire/redraw on window.resize events */
 };
 
 
@@ -140,6 +120,40 @@ $().ready(function() {
             }
         });
     });*/
+    
+    
+    /* Initiate Magnific Popup */
+    /*if ( mq_tag.indexOf("mediamodals") !=-1 && ! loadpopups_loaded ) {
+        
+        // Initialize more than one on a page
+        $('.js-popup').each( function() {
+            
+            $(this).magnificPopup({
+                disableOn: 480, // disable this plugin when window width is less that number
+                delegate: 'a',
+                type: 'image',
+                gallery: {
+                    enabled: true, // set to true to enable gallery
+                    preload: [1,2], // load one previous and 2 next objects
+                    navigateByImgClick: true,
+                    
+                    // Optional... leave these off to use default markup
+                    arrowMarkup: '<button title="%title%" type="button" class="mfp-arrow mfp-arrow-%dir%"></button>', 
+                    tPrev: 'Previous (Left arrow key)', // title for left button
+                    tNext: 'Next (Right arrow key)', // title for right button
+                    tCounter: '<span class="mfp-counter">%curr% of %total%</span>' // title for counter
+                }
+            });
+            
+        }); 
+        loadpopups_loaded = true; 
+    
+    } else {
+        
+        $('.js-popup .js-popup-trigger').click(function(event) {
+            event.preventDefault();
+        }); 
+    }*/
     
     
     /* 
@@ -241,3 +255,25 @@ borderTop=parseInt(cs.borderTopWidth||s.borderTopWidth,10)||0,borderBottom=parse
     }
     
 }); 
+
+
+
+// Keep this at the bottom
+/*
+ * Load, Resize and Orientation change methods
+ * http://css-tricks.com/forums/discussion/16123/reload-jquery-functions-on-ipad-orientation-change/p1 */
+//initial load
+$(window).load( function() { on_resize_orientationchange(); });
+//bind to resize
+var resizeTimer;
+$(window).resize(function () {
+    if (resizeTimer) { clearTimeout(resizeTimer); }
+    // set new timer
+    resizeTimer = setTimeout(function() {
+        resizeTimer = null;
+        // put your resize logic here and it will only be called when there's been a pause in resize events
+        on_resize_orientationchange();
+    }, 350);
+});
+//check for the orientation event and bind accordingly
+if (window.DeviceOrientationEvent) { window.addEventListener('orientationchange', on_resize_orientationchange, false); }

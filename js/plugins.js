@@ -25,21 +25,4 @@ w.addEventListener("orientationchange",restoreZoom,false);w.addEventListener("de
 function has_feature( feature ) { if ( $("html").hasClass( feature ) ) { return true; } else { return false; } }
 
 
-/*
- * Load, Resize and Orientation change methods
- * http://css-tricks.com/forums/discussion/16123/reload-jquery-functions-on-ipad-orientation-change/p1 */
-//initial load
-$(window).load( function() { on_resize_orientationchange(); });
-//bind to resize
-var resizeTimer;
-$(window).resize(function () {
-    if (resizeTimer) { clearTimeout(resizeTimer); }
-    // set new timer
-    resizeTimer = setTimeout(function() {
-        resizeTimer = null;
-        // put your resize logic here and it will only be called when there's been a pause in resize events
-        on_resize_orientationchange();
-    }, 350);
-});
-//check for the orientation event and bind accordingly
-if (window.DeviceOrientationEvent) { window.addEventListener('orientationchange', on_resize_orientationchange, false); } 
+/* Any other plugin libraries that you want to minify here */
