@@ -28,8 +28,9 @@ The meat of the scaffold. I break it down into the following:
 
 ####Folders
 - `/sass/design/` The design files for your project. I break these down into components of the basic templates, including a project mixins and extends file. 
-- `/sass/framework/` The set up for the project – configuration for compass, resets, debug, and functions and mixins that we want to keep consistent from project to project. 
+- `/sass/framework/` The set up for the project – configuration for compass, resets, debug, grid and functions and mixins that we want to keep consistent from project to project. 
 - `/sass/libraries/` External libraries that we want to customize but keep separate from our design. 
+- `/sass/patterns/` The beginnings of a pattern library. Instead of throwing everything possible into the Scaffold, organize and document interesting patterns here. Choose and use. 
 - `/sass/project/` Project-specific variables and our basic grid structure. 
 - `/sass/templates/` Template specific files if needed. These should be more specific than anything in `/design/`. 
 
