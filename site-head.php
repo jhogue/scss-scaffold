@@ -174,7 +174,7 @@
         <ul class="mainnav--list">
             <li><a href="index.php" class="mainnav--link">Read Me</a></li>
             <li><a href="style-guide.php" class="mainnav--link">Style Guide</a></li>
-            <li><a href="vert-ryhthm.php" class="mainnav--link">Vertical Rhythm Sample</a></li>
+            <li><a href="vert-rhythm.php" class="mainnav--link">Vertical Rhythm Sample</a></li>
             <li><a href="grid-sample.php" class="mainnav--link">Grid Sample</a></li>
             <li><a href="fixed-col.php" class="mainnav--link">Fixed Col/Fluid Neighbor</a></li>
             <li><a href="forms.php" class="mainnav--link">Form Sample</a></li>
