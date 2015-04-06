@@ -55,7 +55,16 @@
     /* Remove units for easier math. We are converting to EMs anyway */
     $pixel: clear-units($pixel); 
     $base-size: clear-units($base-size); 
-    @return #{$pixel / $base-size}em;
+    @return ($pixel / $base-size) * 1em;
+}
+
+@function em2px( $em, $base-size:$base-font-size ) {
+    $base-size: 16px !default;
+    
+    /* Remove units for easier math. We are converting to EMs anyway */
+    $pixel: clear-units($em); 
+    $base-size: clear-units($base-size); 
+    @return ($em * $base-size) * 1px;
 }
 
 
