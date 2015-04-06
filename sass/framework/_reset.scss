@@ -146,6 +146,13 @@
         visibility: hidden; 
     }
     
+    // Hide from view but keep readable for assistive devices (simpler than below)
+    // Also nice for JS elements that should be rendered off screen and then brought into view
+    .off-screen {
+        position: absolute; 
+            top: -9999px; left: -9999px; 
+    }
+    
     // Hide only visually, but have it available for screenreaders: by Jon Neal. 
     .screen-reader-text { 
         position: absolute; 

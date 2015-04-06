@@ -77,9 +77,13 @@
     }
 */
 
+
 // Options
 $flexslider-fonts: false; // Boolean. Use (and install) the fonts or disable them
-
+// USe default themes?
+$flexslider-direction-nav: false; 
+$flexslider-control-nav: false; 
+$flexslider-pauseplay: false; 
 
 
 /* Browser Resets
@@ -91,10 +95,7 @@ $flexslider-fonts: false; // Boolean. Use (and install) the fonts or disable the
 
 .slides, 
 .flex-control-nav,
-.flex-direction-nav,
-.typography .slides,
-.typography .flex-control-nav,
-.typography .flex-direction-nav { 
+.flex-direction-nav { 
     margin: 0; 
     padding: 0; 
     list-style: none; 
@@ -122,15 +123,12 @@ $flexslider-fonts: false; // Boolean. Use (and install) the fonts or disable the
 
 /*body*/ .loading {
 
-    .slides {
-        min-height: 280px; 
-        background: center no-repeat url("../img/spinner72-white.gif") transparent; 
-        
-        & > li { 
-            display: none; 
-            -webkit-backface-visibility: hidden; // Hide the slides before the JS is loaded. Avoids image jumping
-        } 
-    }
+    .slides > li { 
+        display: none; 
+        -webkit-backface-visibility: hidden; // Hide the slides before the JS is loaded. Avoids image jumping
+    } 
+    
+    .flex-viewport { max-height: 300px; }
 }
 
 /*.flexslider ul img { 
@@ -138,13 +136,21 @@ $flexslider-fonts: false; // Boolean. Use (and install) the fonts or disable the
     display: block; 
 }*/
 
-.flex-pauseplay span { text-transform: capitalize; }
-
 
 /* Clearfix for the .slides element */
-.slides:after { content: "\0020"; display: block; clear: both; visibility: hidden; line-height: 0; height: 0;}
+.slides:after { 
+    content: "\0020"; 
+    display: block; 
+    clear: both; 
+    visibility: hidden; 
+    line-height: 0; 
+    height: 0;
+}
+
 html[xmlns] .slides { display: block; }
+
 * html .slides { height: 1%; }
+
 
 /* No JavaScript Fallback */
 // Show only the first slide
@@ -154,144 +160,155 @@ html[xmlns] .slides { display: block; }
 /* FlexSlider Default Theme
 *********************************/
 
-// Direction Nav - - - - - - - - - - - -
-/*.flexslider:hover .flex-direction-nav {
+// Direction Nav - Default theme- - - - - - - - - - - -
+@if $flexslider-direction-nav == true {
     
-    .flex-prev { 
-        opacity: 0.7; 
-        left: 0; 
+    .flexslider:hover .flex-direction-nav {
+        
+        .flex-prev { 
+            opacity: 0.7; 
+            left: 0; 
+        }
+        
+        .flex-next { 
+            opacity: 0.7; 
+            right: 0; 
+        }
+        
+        .flex-next:hover, 
+        .flex-prev:hover { opacity: 1; }
     }
     
-    .flex-next { 
-        opacity: 0.7; 
-        right: 0; 
+    .flex-direction-nav {
+        *height: 0;
+        
+        .flex-prev,
+        .flex-next  { 
+            // These animate in when the slide is hovered
+            display: block; 
+            margin: -1.5em 0 0; 
+            position: absolute; 
+                top: 50%; 
+            z-index: 10; 
+            overflow: hidden; 
+            opacity: 0; 
+            cursor: pointer; 
+            
+            // Actual styles
+            color: rgba(#000,.8); 
+            background: $white; 
+            background: rgba($white,.8); 
+            padding: .25em .75em; 
+            font-size: .875em; 
+            font-weight: $bold-weight; 
+            text-transform: uppercase; 
+            text-decoration: none !important; 
+            text-shadow: -1px 0 0 rgba($white,0.5); 
+            @include transition( all 250ms ease ); 
+            @include transition-delay( 250ms ); 
+        }
+        
+        .flex-prev { left: -100px; }
+        
+        .flex-next { right: -100px; }
+        
+        .flex-disabled { 
+            opacity: 0 !important; 
+            filter:alpha(opacity=0); 
+            cursor: default; 
+        }
+        
+        @include pe-media( $max: $breakpoint-small ) {
+      
+            //.flex-direction-nav .flex-prev { opacity: 1; left: 0;}
+            
+            //.flex-direction-nav .flex-next { opacity: 1; right: 0;}
+        }
     }
-    
-    .flex-next:hover, 
-    .flex-prev:hover { opacity: 1; }
 }
 
-.flex-direction-nav {
-    *height: 0;
+
+// Control Nav - Default theme - - - - - - - - - - - -
+@if $flexslider-control-nav == true {
     
-    .flex-prev,
-    .flex-next  { 
-        // These animate in when the slide is hovered
-        display: block; 
-        margin: -1.5em 0 0; 
-        position: absolute; 
-            top: 50%; 
-        z-index: 10; 
-        overflow: hidden; 
-        opacity: 0; 
-        cursor: pointer; 
-        
-        // Actual styles
-        color: rgba(#000,.8); 
-        background: $white; 
-        background: rgba($white,.8); 
-        padding: .25em .75em; 
-        font-size: .875em; 
-        font-weight: $bold-weight; 
-        text-transform: uppercase; 
-        text-decoration: none !important; 
-        text-shadow: -1px 0 0 rgba($white,0.5); 
-        @include transition( all 250ms ease ); 
-        @include transition-delay( 250ms ); 
+    .flex-control-nav {
+        width: 100%; 
+        text-align: center;
     }
     
-    .flex-prev { left: -100px; }
+    .flex-control-nav li {
+        margin: 0 .375em; 
+        display: inline-block; 
+        zoom: 1; 
+        *display: inline;
+    }
     
-    .flex-next { right: -100px; }
+    .flex-control-paging li a {
+        display: block; 
+        width: 1em; 
+        height: 1em; 
+        background: #666; 
+        background: rgba(0,0,0,0.5); 
+        cursor: pointer; 
+        text-indent: -9999px; 
+        @include border-radius( 50% ); 
+        @include box-shadow( 0 0 .25em rgba(#000,0.3) inset ); 
+    }
     
-    .flex-disabled { 
-        opacity: 0 !important; 
-        filter:alpha(opacity=0); 
+    .flex-control-paging li a:hover { 
+        background: $primary; 
+        background: rgba($primary,0.8); 
+    }
+    
+    .flex-control-paging li a.flex-active { 
+        background: #000; 
+        background: rgba(#000,0.9); 
         cursor: default; 
     }
     
-    @include pe-media( $max: $breakpoint-small ) {
-  
-        //.flex-direction-nav .flex-prev { opacity: 1; left: 0;}
-        
-        //.flex-direction-nav .flex-next { opacity: 1; right: 0;}
+    .flex-control-thumbs { 
+        margin: 5px 0 0; 
+        position: static; 
+        overflow: hidden;
     }
-}*/
+    
+    .flex-control-thumbs li {
+        width: 25%; 
+        float: left; 
+        margin: 0;
+    }
+    
+    .flex-control-thumbs img {
+        width: 100%; 
+        display: block; 
+        opacity: .7; 
+        cursor: pointer;
+    }
+    
+    .flex-control-thumbs img:hover { opacity: 1; }
+    
+    .flex-control-thumbs .flex-active { opacity: 1; cursor: default; }
+}
 
 
 // Pause/Play  - - - - - - - - - - - -
-.flex-pauseplay a { 
-    display: block; 
-    width: 20px; 
-    height: 20px; 
-    position: absolute; 
-        bottom: 5px; left: 10px; 
-    opacity: 0.8; 
-    z-index: 10; 
-    overflow: hidden; 
-    cursor: pointer; 
-    color: #000; 
+@if $flexslider-pauseplay == true {
+    
+    .flex-pauseplay span { text-transform: capitalize; }
+    
+    .flex-pauseplay a { 
+        display: block; 
+        width: 20px; 
+        height: 20px; 
+        position: absolute; 
+            bottom: 5px; left: 10px; 
+        opacity: 0.8; 
+        z-index: 10; 
+        overflow: hidden; 
+        cursor: pointer; 
+        color: #000; 
+    }
 }
-
-
-// Control Nav  - - - - - - - - - - - -
-.flex-control-nav {
-    width: 100%; 
-    text-align: center;
-}
-
-.flex-control-nav li {
-    margin: 0 .375em; 
-    display: inline-block; 
-    zoom: 1; 
-    *display: inline;
-}
-
-.flex-control-paging li a {
-    display: block; 
-    width: 1em; 
-    height: 1em; 
-    background: #666; 
-    background: rgba(0,0,0,0.5); 
-    cursor: pointer; 
-    text-indent: -9999px; 
-    @include border-radius( 50% ); 
-    @include box-shadow( 0 0 .25em rgba(#000,0.3) inset ); 
-}
-
-.flex-control-paging li a:hover { 
-    background: $primary; 
-    background: rgba($primary,0.8); 
-}
-
-.flex-control-paging li a.flex-active { 
-    background: #000; 
-    background: rgba(#000,0.9); 
-    cursor: default; 
-}
-
-.flex-control-thumbs { 
-    margin: 5px 0 0; 
-    position: static; 
-    overflow: hidden;
-}
-
-.flex-control-thumbs li {
-    width: 25%; 
-    float: left; 
-    margin: 0;
-}
-
-.flex-control-thumbs img {
-    width: 100%; 
-    display: block; 
-    opacity: .7; 
-    cursor: pointer;
-}
-
-.flex-control-thumbs img:hover { opacity: 1; }
-
-.flex-control-thumbs .flex-active { opacity: 1; cursor: default; }
 
 
 /* Icon Fonts

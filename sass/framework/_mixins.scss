@@ -20,34 +20,29 @@
  */
 $mq-support: true !default; 
 
-@mixin pe-media( $min: null, $max: null,  $height: false, $serve-to-nomq: true ) {
+@mixin pe-media( $min: null, $max: null, $min-h: null, $max-h: null, $serve-to-nomq: true ) {
     
-    @if $min == null and $max == null  {
+    @if $min == null and $max == null and $min-h == null and $max-h == null {
         @warn "Mixin PE-Media requires at least a MIN or MAX width/height";
     }
     
-    $direction: 'width'; 
-    /* If $height is true, override the variable. */
-    @if $height == true {
-        $direction: 'height'; 
-    }
-    
     @if $mq-support {
-        @if $min != null and $max != null {
-            @media ( 'min-' + $direction + ':' + $min ) and ( 'max-' + $direction + ':' + $max ) {
-                @content;
-            }
-        } @else if $max != null {
-            // Could add this feature: $serve-to-nomq: false
-            // Which means we would assume that if there was a max-width, we would NOT serve the style to no-mq
-            @media ( 'max-' + $direction + ':' + $max ) {
-                @content;
-            }
-        } @else {
-            @media ( 'min-' + $direction + ':' + $min ) {
+        $query: ''; 
+        
+        // Build the query
+        @if $min != null { $query: $query + '(min-width: ' + $min + ') and '; }
+        @if $max != null { $query: $query + '(max-width: ' + $max + ') and '; }
+        @if $min-h != null { $query: $query + '(min-height: ' + $min-h + ') and '; }
+        @if $max-h != null { $query: $query + '(max-height: ' + $max-h + ') and '; }
+        
+        @if $query != '' {
+            $final-query: str-slice($query, 0, -5); // chop off the last " and "
+            
+            @media #{$final-query} {
                 @content;
             }
         }
+        
     } @else {
         @if $serve-to-nomq {
             @content;
@@ -74,6 +69,36 @@ $old-ie: false !default;
     @if $old-ie == false { @content; }
 }
 
+
+/*
+ * Provide a hover effect for non-touch devices, turn it into an Active state for mobile, and maintain a fallback. 
+ * @requires Modernizr as a JS dependency to get .no-touch classes
+ * Adds styles via @content
+ */
+@mixin touch-hover( $disabled: false ) {
+    
+    @if $disabled {
+        .no-js &, 
+        .no-js &:hover, // the fallback
+        .no-js &:focus, 
+        .js.no-touchevents &, 
+        .js.no-touchevents &:hover, // enhanced for no-touch
+        .js.no-touchevents &:focus,
+        .js.touchevents &, 
+        .js.touchevents &:active { // relay same styles to active for touch devices
+            @content; 
+        }
+        
+    } @else {
+        .no-js &:hover, // the fallback
+        .no-js &:focus, 
+        .js.no-touchevents &:hover, // enhanced for no-touch
+        .js.no-touchevents &:focus,
+        .js.touchevents &:active { // relay same styles to active for touch devices
+            @content; 
+        }
+    }
+}
 
 /* 
  * Output a little 'tag' on the body:after content
