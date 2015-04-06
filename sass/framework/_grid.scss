@@ -96,3 +96,21 @@
 
 
 // Layout may vary per project. basic columns can be found in design/_layout.scss
+
+
+/* ! ===== Debug helpers ===== */
+
+// Creates a lot of CSS for a striped background image. 
+// Remove or comment out when in production
+.debug-cols {
+    
+    @include column-grid-background(
+        $total          : $project-columns,
+        $column         : $grid-spacing-px*3,
+        $gutter         : $grid-spacing-px*2,
+        $offset         : $grid-spacing-px,
+        $column-color   : rgba($code,.25),
+        $gutter-color   : transparent,
+        $force-fluid    : true
+    );
+}

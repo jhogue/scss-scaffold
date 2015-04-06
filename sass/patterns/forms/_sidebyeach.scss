@@ -1,0 +1,62 @@
+/*
+ * Use case: 
+ * Label as wide as it needs to be, input element next to it taking up as much width as possible
+ *
+ * Other cases: 
+ * Label after the input
+ * Label next to a select box
+ * Label, input AND a button
+ *
+ * Inspiration from http://jsfiddle.net/thirtydot/rQ3xG/466/
+ */
+
+/*<div class="form--sidebyeach">
+    <button class="button button__primary" type="submit">Submit Compound</button>
+    <label for="pfid">PF-ID</label>
+    <span><input class="form--input" id="pfid" type="number" placeholder="12345678" /></span>
+</div>
+  or 
+<div class="form--sidebyeach">
+    <span class="element-before"><select>[...]</select></span>
+    <span><input class="form--input" id="pfid" type="number" placeholder="12345678" /></span>
+</div>
+  or
+<div class="form--sidebyeach">
+    <span><input class="form--input" id="cost" type="number" placeholder="0.00" /></span>
+    <label class="element-after" for="cost">per person</label>
+</div>
+*/
+.form--sidebyeach {
+    overflow: hidden;
+    
+    & > label,
+    .element-before { float: left; }
+    
+    // When we need to break some element combinations for small screens
+    .element-before { 
+        
+        @include pe-media( $max: $breakpoint-tiny, $serve-to-nomq: false ) { 
+            float: none; 
+            margin-bottom: .75em; 
+        }
+    }
+    
+    & > label {
+        margin-top: .75em;
+        padding-right: .5em; 
+    }
+
+    & > span {
+        display: block;
+        overflow: hidden;
+    }
+    
+    & > button,
+    & > .button,
+    & > .element-after { float: right; }
+    
+    & > .element-after { 
+        padding-left: .5em; 
+        padding-right: 0; 
+    } 
+}

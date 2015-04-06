@@ -25,8 +25,8 @@
     
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 @import
-    "project/variables",       // Project variables, colors, etc...
-    "project/breakpoints";     // Breakpoint variables
+    "variables/base",       // Project variables, colors, etc...
+    "variables/breakpoints";     // Breakpoint variables
 
 
 
@@ -45,20 +45,20 @@
     
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 @import 
-    "project/grid";            // Framework grid. Outputs a little bit of CSS
+    "framework/grid";       // Framework grid. Outputs a little bit of CSS
 
 @import 
-    "design/mixins",        // Project mixins
-    "design/extends",       // Project silent %extends
-    "design/layout",        // Apply the grid
-    "design/general",       // Top-level declarations (html, body, etc...)
-    "design/forms",
-    "design/typography",    // All styles needed to support good typography
-    "design/header",        // Page components
-    "design/navigation",    // Page components
-    "design/content",       // Page components
-    "design/sidebar",       // Page components
-    "design/footer";        // Page components. Add more as needed.
+    "project/mixins",       // Project mixins
+    "project/extends",      // Project silent %extends
+    "project/general",      // Top-level declarations (html, body, etc...)
+    "project/forms",
+    "project/typography",   // All styles needed to support good typography
+    "project/header",       // Page components
+    "project/navigation",   // Page components
+    "project/content",      // Page components
+    "project/sidebar",      // Page components
+    "project/footer",       // Page components. Add more as needed.
+    "project/layout";       // Apply the grid
 
 
 
@@ -98,7 +98,7 @@
 
 
 // Keep this at the end because it can create a lot of CSS
-@import "design/fonts"; 
+@import "project/fonts"; 
 
 
 /* 
