@@ -11,6 +11,13 @@ fonts_dir = "fonts"
 css_dir = "stylesheets"
 sourcemap = true
 
+# Specifying these should help all files compile on watch
+add_import_path "sass/framework"
+add_import_path "sass/libraries"
+add_import_path "sass/project"
+add_import_path "sass/templates"
+add_import_path "sass/variables"
+
 
 # You can select your preferred output style here (can be overridden via the command line):
 # Compass needs to RESTART before a new style will take effect
