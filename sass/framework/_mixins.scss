@@ -146,12 +146,17 @@ $old-ie: false !default;
     @include maintain-ratio( $ratio ); 
 }
 
-@mixin proportional-element() {
+@mixin proportional-element( $min: true ) {
     position: absolute; 
         top: 0; left:0; 
     z-index: 2; 
-    width: 100% !important; 
-    height: 100% !important; 
+    @if ($min) {
+        min-width: 100% !important; 
+        min-height: 100% !important; 
+    } @else {
+        width: 100% !important; 
+        height: 100% !important; 
+    }
 }
 
 
