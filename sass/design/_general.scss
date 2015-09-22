@@ -48,10 +48,6 @@ a,
     -webkit-user-select: none;                  // prevent copy paste -- to allow, change 'none' to 'text' 
 }
 
-nav a, 
-menu a, 
-.menu a { display: block; }
-
 
 // Set the highlight colors. These selection declarations have to be separate 
 ::-moz-selection { background: $link-color; color: $white; text-shadow: none; }

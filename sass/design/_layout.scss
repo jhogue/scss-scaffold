@@ -149,55 +149,72 @@
  * Based on http://stugreenham.com/demos/fluid-width-with-a-fixed-sidebar/
  */
 
-/*<section class="fwf-col">
-    <aside class="fwf-fixed-left" role="complementary">
-        [...]
-    </aside>
-    <article class="fwf-wrapper main-content" role="main">
-        <div class="fwf-fluid-right">
-            [...]    
-        </div>
+/*<section class="fwf--row">
+	<aside class="fwf--fixed__left" role="complementary">
+		[...]
+	</aside>
+	<article class="fwf--fluid-wrapper main-content" role="main">
+		<div class="fwf--fluid__right">
+		[...]    
+		</div>
 	</article>
 </section>*/
 
-.fwf-col, .fwf-wrapper {
-    @extend %pie-clearfix; 
+.fwf {
+
+	&--row,
+	&--fluid-wrapper { @include clearfix; }
+
+	&--row { padding-bottom: $vert-line-height; }
 }
 
-.fwf-col { padding-bottom: $vert-grid-spacing; }
+// Temporary
+.fwf--row { border: 1px solid black; }
+.fwf--fixed__left,
+.fwf--fixed__right { border: 1px solid red; min-height: 4em; }
+.fwf--fluid-wrapper  { border: 1px solid blue; }
+.fwf--fluid__left,
+.fwf--fluid__right { border: 1px solid green; min-height: 4em; }
 
-@include pe-media( $breakpoint-medium ) {
-    
-    $fwf-width: 300px; 
-    
-    .fwf-fixed-left, .fwf-fixed-right {
-        position: relative;
-        float: left;
-        width: $fwf-width;
-    }
-    
-    .fwf-fixed-left {
-        left: $fwf-width;
-    	margin-left: - $fwf-width;
-    }
-    
-    .fwf-fixed-right {
-        right: $fwf-width;
-    	margin-right: - $fwf-width;
-    }
-    
-    .fwf-wrapper {
-        float: left;
-    	width: 100%;
-    }
-    
-    $fwf-width-plus-gutter: $fwf-width + ($grid-spacing-px * 2); 
-    
-    .fwf-fluid-left {
-        margin-right: $fwf-width-plus-gutter; 
-    }
-    
-    .fwf-fluid-right {
-        margin-left: $fwf-width-plus-gutter; 
-    }
+@include media($start-right-rail) {
+
+	$fwf-width: 300px; 
+
+	.fwf {
+		
+		&--fixed {
+
+			&__left,
+			&__right {
+				position: relative;
+				float: left;
+				width: $fwf-width;
+			}
+
+			&__left {
+				left: $fwf-width;
+				margin-left: - $fwf-width;
+			}
+
+			&__right {
+				right: $fwf-width;
+				margin-right: - $fwf-width;
+			}
+		}
+	
+		&--fluid-wrapper  {
+			float: left;
+			width: 100%;
+		}
+
+	}
+	
+	$fwf-width-plus-gutter: $fwf-width + (32); 
+
+	.fwf--fluid {
+
+		&__left { margin-right: $fwf-width-plus-gutter; }
+
+		&__right { margin-left: $fwf-width-plus-gutter; }
+	}
 }

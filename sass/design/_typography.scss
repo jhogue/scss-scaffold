@@ -1,8 +1,47 @@
 /* ! ===== Elements inside .typography — Anywhere we want very pretty, readable type styles ===== */
 
+
+/* Typographic scales */
+@mixin type-scale( $scale: 1.2 ) {
+	$base-size: clear-units($base-font-size);
+    $base-lines: clear-units($base-line-height);
+
+	// Every larger font size builds off the one before it
+	$headersix: $base-font-size;
+	$headerfive: $base-font-size;
+	$headerfour: floor($base-font-size*$scale);
+	$headerthree: floor($headerfour*$scale);
+	$headertwo: floor($headerthree*$scale);
+	$headerone: floor($headertwo*$scale);
+	$kilo: floor($headerone*$scale); 
+	$mega: floor($kilo*$scale); 
+	$giga: floor($mega*$scale); 
+	
+	.giga { font-size: $giga; }
+	.mega { font-size: $mega; }
+	.kilo { font-size: $kilo; }
+	h1 { 
+		font-size: px2em($headerone); 
+		line-height: ceil(clear-units($headerone) / $base-lines) * ($base-lines / clear-units($headerone));
+		margin-bottom: 1em * ($base-lines / $base-size);
+	}
+	h2 { font-size: px2em($headertwo); }
+	h3 { font-size: px2em($headerthree); }
+	h4 { font-size: px2em($headerfour); }
+	h5 { font-size: px2em($headerfive); }
+	h6 { font-size: px2em($headersix); }
+	
+	p, ul, ol, address, form, table, figure {
+		font-size: px2em($base-font-size);
+		line-height: $base-line-height-ratio;
+		margin-bottom: $base-line-height;
+	}
+}
+
+
 @mixin content-styles() {
     
-    h1 { 
+    /*h1 { 
         @include headerone();
         text-shadow: 0px -1px 1px #fff; 
         @include pe-rem-helper( margin-top, 42px );
@@ -45,7 +84,6 @@
         @include pe-rem-helper( margin-bottom, $base-line-height/2 ); 
     }
     
-    
     @include pe-media( $max: $breakpoint-small ) {
     	
     	h1 { @include pe-rem-helper( font-size, $headertwo ); }
@@ -53,7 +91,7 @@
     	h2 { @include pe-rem-helper( font-size, $headerthree ); }
     	
     	h3 { @include pe-rem-helper( font-size, $headerfour ); }
-    }
+    }*/
     
     
     p:empty { display: none; }

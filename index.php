@@ -42,11 +42,12 @@ The meat of the scaffold. I break it down into the following:
 
 <h4>Folders</h4>
 <ul>
-    <li><code>/sass/design/</code> The design files for your project. I break these down into components of the basic templates, including a project mixins and extends file. </li>
-    <li><code>/sass/framework/</code> The set up for the project – configuration for compass, resets, debug, and functions and mixins that we want to keep consistent from project to project. </li>
-    <li><code>/sass/libraries/</code> External libraries that we want to customize but keep separate from our design. </li>
-    <li><code>/sass/project/</code> Project-specific variables and our basic grid structure. </li>
-    <li><code>/sass/templates/</code> Template specific files if needed. These should be more specific than anything in <code>/design/</code>. </li>
+	<li><code>/sass/design/</code> The design files for your project. I break these down into components of the basic templates, including a project mixins and extends file. </li>
+	<li><code>/sass/framework/</code> The set up for the project &ndash; configuration for Compass, HTML reset, debug, functions and mixins that we want to keep consistent from project to project. </li>
+	<li><code>/sass/libraries/</code> External libraries that we want to customize but keep separate from our design. </li>
+	<li><code>/sass/patterns/</code> Starting to store common markup and CSS patterns that I encounter. </li>
+	<li><code>/sass/templates/</code> Template specific files if needed. These should be more specific than anything in <code>/design/</code>. </li>
+	<li><code>/sass/variables/</code> Project-specific variables and our basic grid structure. </li>
 </ul>
 
 <h4>Files</h4>
