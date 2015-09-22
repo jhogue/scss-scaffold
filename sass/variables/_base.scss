@@ -75,15 +75,29 @@ $bold-weight                : 700;
 
 
 /* Sizes */
-$giga: 36px; 
-$mega: 32px; 
-$kilo: 28px; 
-$headerone: 24px;
-$headertwo: 22px;
-$headerthree: 20px;
-$headerfour: 18px;
-$headerfive: 16px;
-$headersix: 14px;
+// ratio of a major third – http://type-scale.com/
+$fontsize-ratio: 1.2; 
+
+$micro: 11px; 
+$headersix: floor($base-font-size/$fontsize-ratio);
+$headerfive: $base-font-size;
+$headerfour: floor($base-font-size*$fontsize-ratio);
+$headerthree: floor($headerfour*$fontsize-ratio);
+$headertwo: floor($headerthree*$fontsize-ratio);
+$headerone: floor($headertwo*$fontsize-ratio);
+$kilo: floor($headerone*$fontsize-ratio); 
+$mega: floor($kilo*$fontsize-ratio); 
+$giga: floor($mega*$fontsize-ratio); 
+
+//.giga { font-size: 52px; }
+//.mega { font-size: 44px; }
+//.kilo { font-size: 37px; }
+//h1 { font-size: 31px; }
+//h2 { font-size: 26px; }
+//h3 { font-size: 22px; }
+//h4 { font-size: 19px; }
+//h5 { font-size: 16px; }
+//h6 { font-size: 13px; }
 
 
 /* ! ===== Input Types ===== */
