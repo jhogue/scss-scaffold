@@ -9,7 +9,7 @@
     fieldset, form, label, legend,
     table, caption, tbody, tfoot, thead, tr, th, td,
     article, aside, canvas, details, figcaption, figure,
-    footer, header, hgroup, menu, nav, section, summary,
+    footer, header, hgroup, main, menu, nav, section, summary,
     time, mark, audio, video {
     	margin: 0;
     	padding: 0;
@@ -18,7 +18,7 @@
     	font: inherit;
     	vertical-align: baseline;
     }
-    article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, form { display: block; }
+    article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, form { display: block; }
     
     // Minimal base styles 
     html {
@@ -112,7 +112,15 @@
 /* Reset stuff with classes declarations */
 @mixin reset_additional() {
     
-    nav ul, menu ul, .menu, .tabs { margin-left: 0; list-style: none; }
+    nav ul, 
+    menu ul, 
+    .menu, 
+    .tabs { margin-left: 0; list-style: none; }
+    
+    nav a, 
+    menu a, 
+    .menu a,
+    .tabs a { display: block; }
     
     // Hide the template element in IE, Safari, and Firefox < 22. 
     [hidden], template { display: none; visibility: hidden; }

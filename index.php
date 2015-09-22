@@ -4,11 +4,11 @@
     include ('site-head.php') ?>
     
     
-    <section id="content" class="content">
+    <main id="content" class="content" role="main">
         <div class="container">
                 
-            <article class="content--main" role="main">
-                <div class="typography" style="width: 40em; margin: 0 auto;">
+            <section class="content--main">
+                <article class="typography" style="width: 40em; margin: 0 auto;">
 
 
 <h1>SCSS Scaffold</h1>
@@ -149,11 +149,11 @@ And then our SCSS can be written like this:
 <h3>Happy coding. </h3>
 
 
-                </div>
-    		</article><!-- end .content--main -->
+                </article>
+    		</section><!-- end .content--main -->
         		
         </div><!-- end .container -->
-    </section><!-- end #content .content -->
+    </main><!-- end #content .content -->
 
 
 <?php include ('site-foot.php') ?>
