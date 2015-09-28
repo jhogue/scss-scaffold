@@ -18,16 +18,16 @@
     
     Example: 
     <div class="container">
-        <h1 class="not-column">Title</h1>
-        <div class="two-col">
+        <h1 class="column--not">Title</h1>
+        <div class="column--two">
             <div class="column"> Content </div>
             <div class="column"> Content </div>
         </div>
     </div>
     
     <div class="container__tight">
-        <h1 class="not-column">Widgets</h1>
-        <div class="three-col">
+        <h1 class="column--not">Widgets</h1>
+        <div class="column--three">
             <div class="column"> Content </div>
             <div class="column"> Content </div>
             <div class="column"> Content </div>
@@ -35,7 +35,7 @@
     </div>
     
     <div class="container">
-        <div class="default-col">
+        <div class="column--default">
             <article class="column" role="main"> Content </div>
             <aside class="column" role="complementary"> Content </aside>
         </div>
@@ -45,102 +45,102 @@
 // More settings in base/_grid.scss
 
 
-.two-col, 
-.four-col {
-    @extend %col-row; 
-    
-    .container__tight & { @extend %col-row-tight; }
-    
-    // At small sizes, make the two and four col pattern the same 
-    @include pe-media( $breakpoint-small ) {
-        
-        .column { 
-            float: left; 
-            width: columns(6); 
-            
-            &.pull-right { float: right; }
-        }
-        
-        // every other, starting at the third element 
-        .column:nth-of-type(2n+3) { clear: both; }
-    }
+.column--two, 
+.column--four {
+	@extend %col-row; 
+
+	.container__tight & { @extend %col-row-tight; }
+
+	// At small sizes, make the two and four col pattern the same 
+	@include pe-media( $breakpoint-small ) {
+
+		.column { 
+			float: left; 
+			width: columns(6); 
+		
+			&.pull-right { float: right; }
+		}
+
+		// every other, starting at the third element 
+		.column:nth-of-type(2n+3) { clear: both; }
+	}
 }
 
 
-.four-col {
-    
-    // Redefine the four col structure to be four across 
-    @include pe-media( $breakpoint-large ) {
-        
-        .column { width: columns(3); }
-        
-        .column:nth-of-type(2n+3) { clear: none; } // reset the clear pattern from the two col structure 
-        
-        .column:nth-of-type(4n+5) { clear: both; }
-    }
+.column--four {
+
+	// Redefine the four col structure to be four across 
+	@include pe-media( $breakpoint-large ) {
+
+		.column { width: columns(3); }
+
+		.column:nth-of-type(2n+3) { clear: none; } // reset the clear pattern from the two col structure 
+
+		.column:nth-of-type(4n+5) { clear: both; }
+	}
 }
 
 
-.three-col, 
-.six-col {
-    @extend %col-row; 
-    
-    .container__tight & { @extend %col-row-tight; }
-    
-    // At small sizes, make the two and four col pattern the same 
-    @include pe-media( $breakpoint-medium ) {
-        
-        .column { 
-            float: left; 
-            width: columns(4); 
-            
-            &.pull-right { float: right; }
-        }
-        
-        // every third, starting with the fourth element 
-        .column:nth-of-type(3n+4) { clear: both; }
-    }
+.column--three, 
+.column--six {
+	@extend %col-row; 
+
+	.container__tight & { @extend %col-row-tight; }
+
+	// At small sizes, make the two and four col pattern the same 
+	@include pe-media( $breakpoint-medium ) {
+
+	.column { 
+		float: left; 
+		width: columns(4); 
+
+		&.pull-right { float: right; }
+	}
+
+		// every third, starting with the fourth element 
+		.column:nth-of-type(3n+4) { clear: both; }
+	}
 }
 
 
-.six-col {
-    
-    // Redefine the three col structure to be six across 
-    @include pe-media( $breakpoint-large ) {
-        
-        .column { width: columns(2); } 
-        
-        .column:nth-of-type(3n+4) { clear: none; } // reset the clear pattern from the three col structure 
-        
-        // every sixth, starting with the seventh element 
-        .column:nth-of-type(6n+7) { clear: left; }
-    }
+.column--six {
+
+	// Redefine the three col structure to be six across 
+	@include pe-media( $breakpoint-large ) {
+
+		.column { width: columns(2); } 
+
+		.column:nth-of-type(3n+4) { clear: none; } // reset the clear pattern from the three col structure 
+
+		// every sixth, starting with the seventh element 
+		.column:nth-of-type(6n+7) { clear: left; }
+	}
 }
 
 
 // Any asymmetrical pattern that you would like to support a main column and a sidebar
-.default-col {
-    @extend %col-row; 
-    
-    @include pe-media( $breakpoint-small ) {
-        
-        .column { 
-            float: left; 
-            
-            &.pull-right { float: right; }
-        }
-        
-        & > [role="main"] { width: 65%; }
-        
-        & > [role="complementary"] { width: 35%; }
-    }
-    
-    @include pe-media( $breakpoint-medium ) {
-        
-        & > [role="main"] { width: 70%; }
-        
-        & > [role="complementary"] { width: 30%; }
-    }
+.column--default {
+	@extend %col-row; 
+
+	@include pe-media( $breakpoint-small ) {
+
+		.column { 
+			float: left; 
+
+			&.pull-right { float: right; }
+		}
+
+		& > [role="main"] { width: 65%; }
+
+		& > [role="complementary"] { width: 35%; }
+	}
+
+	@include pe-media( $breakpoint-medium ) {
+
+		& > [role="main"] { width: 70%; }
+
+		& > [role="complementary"] { width: 30%; }
+	}
 }
 
 

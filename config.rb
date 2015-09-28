@@ -12,9 +12,9 @@ css_dir = "stylesheets"
 sourcemap = true
 
 # Specifying these should help all files compile on watch
+add_import_path "sass/design"
 add_import_path "sass/framework"
 add_import_path "sass/libraries"
-add_import_path "sass/project"
 add_import_path "sass/templates"
 add_import_path "sass/variables"
 

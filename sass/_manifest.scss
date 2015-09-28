@@ -40,37 +40,37 @@
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    // Project design. One file for each major set of elements
-    // Each file will output CSS
-    
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-@import 
-    "framework/grid";       // Framework grid. Outputs a little bit of CSS
-
-@import 
-    "design/mixins",       // Project mixins
-    "design/extends",      // Project silent %extends
-    "design/general",      // Top-level declarations (html, body, etc...)
-    "design/forms",
-    "design/typography",   // All styles needed to support good typography
-    "design/header",       // Page components
-    "design/navigation",   // Page components
-    "design/content",      // Page components
-    "design/sidebar",      // Page components
-    "design/footer",       // Page components. Add more as needed.
-    "design/layout";       // Apply the grid
-
-
+	// Project design. One file for each major set of elements
+	// Each file will output CSS
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+@import 
+	"framework/grid";       // Framework grid. Outputs a little bit of CSS
 
-    // Project Templates. These might override more global styles called previously. 
-    // Each file will output CSS
-    
+@import 
+	"design/mixins",       // Project mixins
+	"design/extends",      // Project silent %extends
+	"design/general",      // Top-level declarations (html, body, etc...)
+	"design/forms",
+	"design/typography",   // All styles needed to support good typography
+	"design/header",       // Page components
+	"design/navigation",   // Page components
+	"design/content",      // Page components
+	"design/sidebar",      // Page components
+	"design/footer",       // Page components. Add more as needed.
+	"design/layout";       // Apply the grid
+
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+	// Project Templates. These might override more global styles called previously. 
+	// Each file will output CSS
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 @import 
-    "templates/home",
-    "templates/slideshows";
+	"templates/home",
+	"templates/slideshows";
 
 
 
@@ -78,19 +78,19 @@
     // External Libraries/Plugins that output CSS
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 @import "libraries/flexslider",
-        "libraries/magnific-popup"; 
+		"libraries/magnific-popup"; 
 
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    // Communicating to Javascript
+	// Communicating to Javascript
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 @include javascript_tag( 'navigation-drawer' ); 
 
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    // The bottom of the rendered CSS
+	// The bottom of the rendered CSS
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 @include html5boilerplate_helpers(); 
 // Hide @print styles from Old IE, they ignore the @print but see the styles inside. 
@@ -108,9 +108,9 @@
  * Uses :not selectors a bunch, so only modern browsers will support them
  */
 @import "framework/debug"; 
-    //@include heydon_rules; 
-    //@include debug_links;
-    //@include debug_images;
-    //@include debug_misc;
-    //@include debug_deprecated;
-    //@include debug_empty;
+	//@include heydon_rules; 
+	//@include debug_links;
+	//@include debug_images;
+	//@include debug_misc;
+	//@include debug_deprecated;
+	//@include debug_empty;
